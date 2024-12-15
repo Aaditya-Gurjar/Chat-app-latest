@@ -19,7 +19,7 @@ app.use(express.json()); // to accept json data
 //   res.send("API Running!");
 // });
 
-app.use(cors());
+// app.use(cors());
 
 
 app.use("/api/user", userRoutes);
@@ -54,8 +54,8 @@ const server = app.listen(
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin: "http://localhost:3000",
-    // credentials: true,
+    origin: "https://interview-questions-kuft.onrender.com",
+    credentials: true,
   },
 });
 
