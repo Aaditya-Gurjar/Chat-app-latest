@@ -1,10 +1,13 @@
-import { Box } from "@chakra-ui/layout";
+import { Box, Button } from "@chakra-ui/react"; // Import Chakra UI components
 import "./styles.css";
 import SingleChat from "./SingleChat";
 import { ChatState } from "../Context/ChatProvider";
+import axios from "axios";
 
 const Chatbox = ({ fetchAgain, setFetchAgain }) => {
   const { selectedChat } = ChatState();
+
+  
 
   return (
     <Box
@@ -17,7 +20,10 @@ const Chatbox = ({ fetchAgain, setFetchAgain }) => {
       borderRadius="lg"
       borderWidth="1px"
     >
+      {/* SingleChat Component */}
       <SingleChat fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
+
+     
     </Box>
   );
 };

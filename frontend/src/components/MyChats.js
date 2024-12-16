@@ -17,7 +17,6 @@ const MyChats = ({ fetchAgain }) => {
   const toast = useToast();
 
   const fetchChats = async () => {
-    // console.log(user._id);
     try {
       const config = {
         headers: {
@@ -29,8 +28,39 @@ const MyChats = ({ fetchAgain }) => {
       setChats(data);
     } catch (error) {
       toast({
-        title: "Error Occured!",
-        description: "Failed to Load the chats",
+        title: "Error Occurred!",
+        description: "Failed to load the chats.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom-left",
+      });
+    }
+  };
+
+  const deleteQuestions = async () => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+      const { data } = await axios.delete("/api/user/deleteAll", config);
+
+      toast({
+        title: "Deleted Successfully!",
+        description: "All questions have been deleted.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom-left",
+      });
+      window.location.reload();
+      // Optionally refresh chats or other data
+    } catch (error) {
+      toast({
+        title: "Error Occurred!",
+        description: "Failed to delete questions.",
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -67,6 +97,16 @@ const MyChats = ({ fetchAgain }) => {
         alignItems="center"
       >
         My Chats
+      </Box>
+      <Box
+        d="flex"
+        flexDir={{ base: "column", md: "row" }} // Stacks vertically on mobile
+        gap={2}
+        w="100%"
+        alignItems="center"
+        justifyContent="space-between"
+        pb={3}
+      >
         <GroupChatModal>
           <Button
             d="flex"
@@ -76,6 +116,14 @@ const MyChats = ({ fetchAgain }) => {
             New Group Chat
           </Button>
         </GroupChatModal>
+        <Button
+          colorScheme="red"
+          fontSize={{ base: "14px", md: "10px", lg: "14px" }} // Removed mt from here
+          mt={{ base: "10px" }} // Added margin-top as a separate prop
+          onClick={deleteQuestions}
+        >
+          Delete Questions
+        </Button>
       </Box>
       <Box
         d="flex"

@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 const generateToken = require("../config/generateToken");
+const Message = require("../models/messageModel");
 
 //@description     Get or Search all users
 //@route           GET /api/user?search=
@@ -82,4 +83,16 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { allUsers, registerUser, authUser };
+
+
+// Controller to delete all messages
+const deleteAllMessages = asyncHandler(async (req, res) => {
+  await Message.deleteMany({}); // Delete all documents in the Message collection
+  res.status(200).json({ message: "All messages have been deleted successfully." });
+});
+
+module.exports = { deleteAllMessages };
+
+
+
+module.exports = { allUsers, registerUser, authUser,deleteAllMessages };
