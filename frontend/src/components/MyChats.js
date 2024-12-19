@@ -55,7 +55,7 @@ const MyChats = ({ fetchAgain }) => {
         isClosable: true,
         position: "bottom-left",
       });
-      window.location.reload();
+        window.location.reload();
       // Optionally refresh chats or other data
     } catch (error) {
       toast({
